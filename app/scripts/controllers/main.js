@@ -32,15 +32,15 @@ angular.module('gletscherelfApp', ['heatmap'])
       }
     };
 
-    $scope.heatmapData = generateRandomData(1000);
+    $scope.heatmapData = generateRandomData(50);
 
     $scope.heatmapConfig = {
       blur: .9,
       opacity: .5
     };
-    
+
     $scope.updateData = function() {
-      $scope.heatmapData = generateRandomData(1000);
+      $scope.heatmapData = generateRandomData(50);
     };
 
   }]);

@@ -1,32 +1,29 @@
-body,
-html {
+body, html {
   margin: 0;
   padding: 0;
   max-width: 990px;
+  max-height: 100%;
 }
-
 img {
+  display: block;
+  position: relative;
   width: 100%;
-
+  width: 1400px;
+  height: 980px;
 }
-
 .row {
   margin: 15px auto;
   padding: 25px;
   width: 90%;
 }
-
 input {
   width: 60px;
 }
-
-form,
-input {
-  font-size:50px;
+form, input {
+  font-size: 50px;
 }
-
-#heatmap-1 {
-  width: 800px;
-  height: 600px;
-  position: absolute;
+#heatmapContainer {
+  display: block;
+  width: 1400px;
+  height: 980px;
 }
