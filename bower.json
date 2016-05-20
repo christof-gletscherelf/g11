@@ -3,7 +3,11 @@
   "version": "0.0.0",
   "dependencies": {
     "angular": "^1.4.0",
-    "angular-resource": "^1.4.0"
+    "angular-resource": "^1.4.0",
+    "nouislider": "~8.5.1",
+    
+    "wnumb": "^1.0.2",
+    "nouislider": "^8.5.1"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

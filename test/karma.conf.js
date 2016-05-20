@@ -22,6 +22,8 @@ module.exports = function(config) {
       // bower:js
       'bower_components/angular/angular.js',
       'bower_components/angular-resource/angular-resource.js',
+      'bower_components/nouislider/distribute/nouislider.js',
+      'bower_components/wnumb/wnumb.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
