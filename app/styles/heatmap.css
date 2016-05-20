@@ -24,3 +24,9 @@ form,
 input {
   font-size:50px;
 }
+
+#heatmap-1, .heatmap-canvas {
+  width: 800px;
+  height: 600px;
+  position: absolute;
+}
