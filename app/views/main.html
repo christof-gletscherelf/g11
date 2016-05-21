@@ -6,12 +6,21 @@
   <div ya-no-ui-slider="ctrl.options" ya-no-ui-slider-events="ctrl.events"></div>
 </div>
 
+<img id="christof" src="images/christof.jpg" ng-click="loadData('final/christof.json')"/>
+<img id="ambros" src="images/ambros.jpg" ng-click="loadData('improved/ambros.json')"/>
+
+
+
 <div class="row">
   From minute
   <input type="number" ng-model="ctrl.options.start[0]" /> to minute
   <input type="number" ng-model="ctrl.options.start[1]" />
+
   <button ng-click="ctrl.options.start = [0, 45]">first half</button>
   <button ng-click="ctrl.options.start = [45, 90]">second half</button>
+  <button ng-click="ctrl.options.start = [11, 12]">1 : 0</button>
+  <button ng-click="ctrl.options.start = [30, 31]">1 : 1</button>
+  <button ng-click="ctrl.options.start = [87, 88]">1 : 2</button>
 
   <!-- use central minute to show current position / to scroll / ... -->
   <!--
@@ -25,22 +34,29 @@
 <div class="row">
   <table>
     <tr>
+      <th colspan="3">{{ gameData.team }}</th>
+    </tr>
+    <tr>
+      <th colspan="1">{{ gameData.name }}</th>
+      <th colspan="2">{{ gameData.position }}</th>
+    </tr>
+    <tr>
+        <td colspan="4"></td>
+    </tr>
+    <tr>
       <th></th>
       <th>Selected Period</th>
-      <th> </th>
       <th>Total by end of period</th>
     </tr>
     <tr>
       <th>Distance</th>
-      <td>{{ distancePeriod }} m</td>
-      <td></td>
-      <td>{{ distanceTotal }} m</td>
+      <td>{{ distancePeriod | number:1 }} m</td>
+      <td>{{ distanceTotal | number:1 }} m</td>
     </tr>
     <tr>
       <th>Average Speed</th>
-      <td>{{ speedPeriod }} m/s</td>
-      <td></td>
-      <td>{{ speedTotal }} m/s</td>
+      <td>{{ speedPeriod | number:1 }} km/h</td>
+      <td>{{ speedTotal | number:1 }} km/h</td>
     </tr>
   </table>
 </div>

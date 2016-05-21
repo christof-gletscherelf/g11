@@ -4,9 +4,9 @@ body, html {
   max-width: 1050px;
   max-height: 100%;
   font-family: "Verdana";
-  font-size: 30px;
+  font-size: 25px;
 }
-img {
+img#footballfield {
   display: block;
   position: relative;
   width: 100%;
@@ -47,4 +47,18 @@ th, td {
 
 td {
     text-align: center;
+}
+
+#christof {
+  position: fixed;
+  top: 0;
+  left: 1100px;
+  width: 200px;
+}
+
+#ambros {
+  position: fixed;
+  top: 0;
+  left: 1350px;
+  width: 200px;
 }
