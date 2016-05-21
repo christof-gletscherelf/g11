@@ -34,10 +34,12 @@ angular.module('gletscherelfApp', ['heatmap', 'ya.nouislider'])
       }
     }
 
-    $http.get('data/sample.json')
+    $http.get('data/chrischi.json')
       .then(function(result) {
+
         $scope.gameData = result.data.gameData;
         $scope.heatmapData = $scope.gameData;
+
       });
 
 
@@ -72,13 +74,14 @@ angular.module('gletscherelfApp', ['heatmap', 'ya.nouislider'])
     that.options = {
       start: [0, 15],
       behaviour: 'drag',
+      step: 1,
       connect: true,
       range: {
         'min': 0,
         'max': 90
       },
       format: wNumb({
-        decimals: 0,
+        decimals: 2,
       }),
       pips: {
         mode: 'values',

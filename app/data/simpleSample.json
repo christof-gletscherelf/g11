@@ -2,22 +2,35 @@
   "gameData": {
     "max": 1,
     "min": 1,
+    "averageSpeed": 20,
     "data": [{
       "x": 10,
       "y": 10,
-      "value": 1
+      "value": 1,
+      "elapsedTimeInSeconds": 1,
+      "totalDistance": 12.0,
+      "distanceSinceLastPoint": 1.0
     }, {
       "x": 200,
       "y": 200,
-      "value": 1
+      "value": 1,
+      "elapsedTimeInSeconds": 2,
+      "totalDistance": 13.0,
+      "distanceSinceLastPoint": 1.0
     }, {
       "x": 300,
       "y": 300,
-      "value": 1
+      "value": 1,
+      "elapsedTimeInSeconds": 3,
+      "totalDistance": 14.0,
+      "distanceSinceLastPoint": 1.0
     }, {
       "x": 400,
       "y": 400,
-      "value": 1
+      "value": 1,
+      "elapsedTimeInSeconds": 4,
+      "totalDistance": 17.0,
+      "distanceSinceLastPoint": 3.0
     }]
   }
 }
