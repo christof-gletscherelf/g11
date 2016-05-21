@@ -13,6 +13,8 @@ angular.module('gletscherelfApp', ['heatmap', 'ya.nouislider'])
     $scope.gameData = {};
 
 
+
+
     function generateRandomData(len) {
       var max = 100;
       var min = 1;
@@ -90,6 +92,9 @@ angular.module('gletscherelfApp', ['heatmap', 'ya.nouislider'])
       }
     };
 
+    // slider movements ///////////////////////////////////////////////////////////////////////////
+    // if slider moves, only display a part of the game coordinates
+
     function getPartialGameData(from, to) {
       var partialGameData = {};
       partialGameData.max = $scope.gameData.max;
@@ -98,11 +103,19 @@ angular.module('gletscherelfApp', ['heatmap', 'ya.nouislider'])
       return partialGameData;
     }
 
+    function updateDistanceAndSpeed(fromMinute, toMinute) {
+      $scope.distancePeriod = $scope.gameData.data[toMinute].totalDistance - $scope.gameData.data[fromMinute].totalDistance;
+      $scope.distanceTotal = $scope.gameData.data[toMinute].totalDistance;
+      $scope.speedPeriod = $scope.distancePeriod / (toMinute - fromMinute) * 60;
+      $scope.speedTotal = $scope.distanceTotal / toMinute * 60;
+
+    }
 
     function updateHeatmap() {
       var fromMinute = that.options.start[0];
       var toMinute = that.options.start[1];
       $scope.heatmapData = getPartialGameData(fromMinute, toMinute);
+      updateDistanceAndSpeed(fromMinute, toMinute);
     }
 
     that.events = {
@@ -110,103 +123,6 @@ angular.module('gletscherelfApp', ['heatmap', 'ya.nouislider'])
     };
 
     // to calculate current position
-    $scope.currentMinute = (that.options.start[0] + that.options.start[1]) / 2;
-
-
-    // slider movements ///////////////////////////////////////////////////////////////////////////
-    // if slider moves, only display a part of the game coordinates
-
-    // var fromMinute = document.getElementById('fromMinute');
-    // var toMinute = document.getElementById('toMinute');
-
-
-
-
-
+    // $scope.currentMinute = (that.options.start[0] + that.options.start[1]) / 2;
 
   }]);
-
-// // random heatmap data /////////////////////////////////////////////////////////////////////////////
-// //var img = document.getElementById('footballfield');
-// var img = angular.element( document.querySelector( '#footballfield' ) );
-// var fieldWidth = img.clientWidth;
-// var fieldHeight = img.clientHeight;
-
-//
-// // data for the whole game
-// // randomized coordinates
-// function deviateCoordinateFromLen(len, max) {
-//   var random = Math.random();
-//   var linearPart = (5400 - len);
-//   var randomPart = max * random;
-//   var quota = len / max;
-//   var normalizedLinearPart = linearPart / quota / 2;
-//   var normalizedRandomPart = randomPart / quota / 2;
-//   var result = (normalizedLinearPart * 0.8) + (normalizedRandomPart * 0.2);
-//   return result >> 0;
-// }
-//
-// function generateWholeGameData(len) {
-//   var max = 1;
-//   var min = 1;
-//   var maxX = fieldWidth;
-//   var maxY = fieldHeight;
-//   var data = [];
-//   while (len--) {
-//     data.push({
-//       x: deviateCoordinateFromLen(len, maxX),
-//       y: deviateCoordinateFromLen(len, maxY),
-//       value: 1
-//     });
-//   }
-//   return {
-//     max: max,
-//     min: min,
-//     data: data
-//   };
-// }
-//
-//
-//
-// //text field inputs //////////////////////////////////////////////////////////////////////////
-// function updateFrom(value) {
-//  dragSlider.noUiSlider.set([value, null]);
-// }
-//
-// function updateTo(value) {
-//   dragSlider.noUiSlider.set([null, value]);
-// }
-//
-// // heatmap initialisation /////////////////////////////////////////////////////////////////////////
-// // instantiate heatmap
-// var myContainer = angular.element( document.querySelector( '#heatmapContainer' ) );
-//
-// var heatmap = h337.create({
-//   container: myContainer,
-//   maxOpacity: 0.5,
-//   radius: 20,
-//   blur: 1.0,
-// });
-//
-//
-//
-//
-// var wholeGameCoordinates = [];
-// wholeGameCoordinates = generateWholeGameData(5400);
-//
-//
-//
-
-
-
-
-
-//
-//
-//
-// var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(wholeGameCoordinates));
-// var dlAnchorElem = document.getElementById('downloadAnchorElem');
-// dlAnchorElem.setAttribute("href", dataStr);
-// dlAnchorElem.setAttribute("download", "sample.json");
-
-//});

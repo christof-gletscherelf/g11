@@ -10,7 +10,10 @@
   From minute
   <input type="number" ng-model="ctrl.options.start[0]" /> to minute
   <input type="number" ng-model="ctrl.options.start[1]" />
+  <button ng-click="ctrl.options.start = [0, 45]">first half</button>
+  <button ng-click="ctrl.options.start = [45, 90]">second half</button>
 
+  <!-- use central minute to show current position / to scroll / ... -->
   <!--
   current minute
   <input type="number" ng-model="currentMinute"/>
@@ -18,11 +21,31 @@
 
 </div>
 
+
 <div class="row">
-  <button ng-click="ctrl.options.start = [0, 45]">first half</button>
-  <button ng-click="ctrl.options.start = [45, 90]">second half</button>
+  <table>
+    <tr>
+      <th></th>
+      <th>Selected Period</th>
+      <th> </th>
+      <th>Total by end of period</th>
+    </tr>
+    <tr>
+      <th>Distance</th>
+      <td>{{ distancePeriod }} m</td>
+      <td></td>
+      <td>{{ distanceTotal }} m</td>
+    </tr>
+    <tr>
+      <th>Average Speed</th>
+      <td>{{ speedPeriod }} m/s</td>
+      <td></td>
+      <td>{{ speedTotal }} m/s</td>
+    </tr>
+  </table>
 </div>
 
+<!-- download a generated json file -->
 <!-- <div class="row">
   <a id="downloadAnchorElem">download json</a>
 </div> -->
