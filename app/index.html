@@ -13,8 +13,10 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
+    <!-- <link rel="stylesheet" href="styles/main.css"> -->
     <link rel="stylesheet" href="styles/heatmap.css">
+    <link rel="stylesheet" href="styles/nouislider.css">
+    <link rel="stylesheet" href="styles/nouislider.pips.css">
     <!-- endbuild -->
   </head>
   <body ng-app="gletscherelfApp">
@@ -23,7 +25,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div id="heatmapContainerWrapper" ng-include="'views/main.html'" ng-controller="MainCtrl"></div>
+    <div id="heatmapContainerWrapper" ng-include="'views/main.html'" ng-controller="MainCtrl as ctrl"></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -44,6 +46,7 @@
     <script src="bower_components/heatmap.js-amd/build/heatmap.js"></script>
     <script src="bower_components/heatmap.js-amd/plugins/angular-heatmap.js"></script>
     <script src="bower_components/wnumb/wnumb.js"></script>
+    <script src="bower_components/nouislider-angular/nouislider.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

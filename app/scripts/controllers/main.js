@@ -7,15 +7,17 @@
  * # MainCtrl
  * Controller of the gletscherelfApp
  */
-angular.module('gletscherelfApp', ['heatmap'])
-  .controller('MainCtrl', ['$scope', '$heatmap', function($scope, $heatmap) {
-    //var dragSlider = document.getElementById('drag');
+angular.module('gletscherelfApp', ['heatmap', 'ya.nouislider'])
+  .controller('MainCtrl', ['$scope', '$heatmap', '$http', function($scope, $heatmap, $http) {
+
+    $scope.gameData = {};
+
 
     function generateRandomData(len) {
       var max = 100;
       var min = 1;
-      var maxX = 1000;//document.body.clientWidth;
-      var maxY = 900;//document.body.clientHeight;
+      var maxX = 1400; //document.body.clientWidth;
+      var maxY = 990; //document.body.clientHeight;
       var data = [];
       while (len--) {
         data.push({
@@ -30,18 +32,94 @@ angular.module('gletscherelfApp', ['heatmap'])
         min: min,
         data: data
       }
-    };
+    }
 
-    $scope.heatmapData = generateRandomData(50);
+    $http.get('data/sample.json')
+      .then(function(result) {
+        $scope.gameData = result.data.gameData;
+        $scope.heatmapData = $scope.gameData;
+      });
+
 
     $scope.heatmapConfig = {
-      blur: .9,
-      opacity: .5
+      blur: 0.9,
+      opacity: 0.5
     };
 
     $scope.updateData = function() {
-      $scope.heatmapData = generateRandomData(50);
+      $scope.heatmapData = generateRandomData(5400);
     };
+
+    // slider initialisation ///////////////////////////////////////////////////////////////////////////
+
+    // first, define legend values
+    var goals = [12, 31, 88];
+    var values = [0, 15, 30, 45, 60, 75, 90];
+    var goalsAndValues = goals.concat(values);
+
+    // distinguish between "normal" and "highlighted" legend  numbers (e.g. to show game events like goals)
+    function preparePips(value) {
+      var goalIndex = goals.indexOf(value);
+      if (goalIndex !== -1) {
+        return 1;
+      } else {
+        return 2;
+      }
+    }
+
+    // then, create a range slider comprising 90 minutes using above legend values
+    var that = this;
+    that.options = {
+      start: [0, 15],
+      behaviour: 'drag',
+      connect: true,
+      range: {
+        'min': 0,
+        'max': 90
+      },
+      format: wNumb({
+        decimals: 0,
+      }),
+      pips: {
+        mode: 'values',
+        values: goalsAndValues,
+        filter: preparePips
+      }
+    };
+
+    function getPartialGameData(from, to) {
+      var partialGameData = {};
+      partialGameData.max = $scope.gameData.max;
+      partialGameData.min = $scope.gameData.min;
+      partialGameData.data = $scope.gameData.data.slice(from * 60, to * 60);
+      return partialGameData;
+    }
+
+
+    function updateHeatmap() {
+      var fromMinute = that.options.start[0];
+      var toMinute = that.options.start[1];
+      $scope.heatmapData = getPartialGameData(fromMinute, toMinute);
+    }
+
+    that.events = {
+      update: updateHeatmap.bind(undefined)
+    };
+
+    // to calculate current position
+    $scope.currentMinute = (that.options.start[0] + that.options.start[1]) / 2;
+
+
+    // slider movements ///////////////////////////////////////////////////////////////////////////
+    // if slider moves, only display a part of the game coordinates
+
+    // var fromMinute = document.getElementById('fromMinute');
+    // var toMinute = document.getElementById('toMinute');
+
+
+
+
+
 
   }]);
 
@@ -114,73 +192,12 @@ angular.module('gletscherelfApp', ['heatmap'])
 // wholeGameCoordinates = generateWholeGameData(5400);
 //
 //
-// // function readGameDataFromFile(len) {
-// //   var myData = JSON.parse(sampleReduced);
-// //   return myData;
-// // }
 //
-//
-//
-//
-//
-// slider initialisation ///////////////////////////////////////////////////////////////////////////
 
-// first, define legend values
-// var goals = [12, 31, 88];
-// var values = [0, 15, 30, 45, 60, 75, 90];
-// var goalsAndValues = goals.concat(values);
-// // distinguish between "normal" and "highlighted" legend  numbers (e.g. to show game events like goals)
-// function preparePips(value, type) {
-//   var goalIndex = goals.indexOf(value);
-//   if (goalIndex !== -1) {
-//     return 1;
-//   } else {
-//     return 2;
-//   }
-// }
-//
-// // then, create a range slider comprising 90 minutes using above legend values
-//
-// noUiSlider.create(dragSlider, {
-//   start: [0, 15],
-//   behaviour: 'drag',
-//   connect: true,
-//   range: {
-//     'min': 0,
-//     'max': 90
-//   },
-//   format: wNumb({
-//     decimals: 0,
-//   }),
-//   pips: {
-//     mode: 'values',
-//     values: goalsAndValues,
-//     filter: preparePips
-//   }
-// });
-//
-//
-//
-// // slider movements ///////////////////////////////////////////////////////////////////////////
-//
-// // if slider moves, only display a part of the game coordinates
-// var fromMinute = document.getElementById('fromMinute');
-// var toMinute = document.getElementById('toMinute');
-//
-// function getPartialGameCoordinates(from, to) {
-//   var partialGameCoordinates = {};
-//   partialGameCoordinates.max = wholeGameCoordinates.max;
-//   partialGameCoordinates.min = wholeGameCoordinates.min;
-//   partialGameCoordinates.data = wholeGameCoordinates.data.slice(from * 60, to * 60);
-//   return partialGameCoordinates;
-// }
-//
-// dragSlider.noUiSlider.on('update', function(values, handle) {
-//   fromMinute.value = values[0];
-//   toMinute.value = values[1];
-//   heatmap.setData(getPartialGameCoordinates(fromMinute.value, toMinute.value));
-//   heatmap.repaint();
-// });
+
+
+
+
 //
 //
 //

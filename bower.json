@@ -7,7 +7,8 @@
     "nouislider": "~8.5.1",
     "heatmap.js-amd": "*",
     "wnumb": "^1.0.2",
-    "nouislider": "^8.5.1"
+    "nouislider": "^8.5.1",
+    "nouislider-angular": "^2.3.0"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

@@ -1,22 +1,28 @@
-
-    <heatmap id="heatmapContainer" data="heatmapData" config="heatmapConfig" ng-click="updateData()">
-      <img id="footballfield" src="images/bg.jpg" />
-    </heatmap>
-
-
-
-
-
+<heatmap id="heatmapContainer" data="heatmapData" config="heatmapConfig" ng-click="updateData()">
+  <img id="footballfield" src="images/bg.jpg" />
+</heatmap>
 
 <div class="row">
-  <div id="drag"></div>
+  <div ya-no-ui-slider="ctrl.options" ya-no-ui-slider-events="ctrl.events"></div>
 </div>
 
 <div class="row">
-  <form>
-    From minute
-    <input id="fromMinute" type="text" name="from" onchange="updateFrom(this.value)" /> to minute
-    <input id="toMinute" type="text" name="from" onchange="updateTo(this.value)" />
-  </form>
+  From minute
+  <input type="number" ng-model="ctrl.options.start[0]" /> to minute
+  <input type="number" ng-model="ctrl.options.start[1]" />
+
+  <!--
+  current minute
+  <input type="number" ng-model="currentMinute"/>
+  -->
+
+</div>
+
+<div class="row">
+  <button ng-click="ctrl.options.start = [0, 45]">first half</button>
+  <button ng-click="ctrl.options.start = [45, 90]">second half</button>
+</div>
+
+<div class="row">
   <a id="downloadAnchorElem">download json</a>
 </div>

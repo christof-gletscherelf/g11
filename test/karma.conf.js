@@ -26,6 +26,7 @@ module.exports = function(config) {
       'bower_components/heatmap.js-amd/build/heatmap.js',
       'bower_components/heatmap.js-amd/plugins/angular-heatmap.js',
       'bower_components/wnumb/wnumb.js',
+      'bower_components/nouislider-angular/nouislider.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
