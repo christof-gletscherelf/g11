@@ -93,6 +93,10 @@ angular.module('gletscherelfApp', ['heatmap', 'ya.nouislider'])
     }
 
     function updateDistanceAndSpeed(fromSecond, toSecond) {
+
+      if (toSecond > 800) {
+        toSecond = 800;
+      }
       $scope.distancePeriod = $scope.gameData.data[toSecond].totalDistance - $scope.gameData.data[fromSecond].totalDistance;
       $scope.distanceTotal = $scope.gameData.data[toSecond].totalDistance;
       $scope.speedPeriod = $scope.distancePeriod / (toSecond - fromSecond) * 3.6;
@@ -112,7 +116,7 @@ angular.module('gletscherelfApp', ['heatmap', 'ya.nouislider'])
     };
 
     $scope.loadData = function (file) {
-      $http.get('data/' + file)
+      $http.get('images/data/' + file)
         .then(function(result) {
 
           $scope.gameData = result.data.gameData;
